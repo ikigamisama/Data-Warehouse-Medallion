@@ -1,0 +1,7 @@
+duckdb
+fastapi
+uvicorn[standard]
+apache-airflow-providers-amazon
+s3fs
+boto3
+python-dotenv

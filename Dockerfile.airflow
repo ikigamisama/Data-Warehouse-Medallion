@@ -1,0 +1,12 @@
+FROM apache/airflow:3.0.1
+
+USER airflow
+
+COPY setup_conn.py /opt/airflow/setup_conn.py
+COPY requirements.txt /
+RUN pip install --no-cache-dir -r /requirements.txt
+
+
+
+
+

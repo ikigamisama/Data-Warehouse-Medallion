@@ -1,0 +1,6 @@
+{"timestamp":"2025-05-24T12:47:23.312694","level":"info","event":"DAG bundles loaded: dags-folder","logger":"airflow.dag_processing.bundles.manager.DagBundlesManager"}
+{"timestamp":"2025-05-24T12:47:23.317898","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/analytics_dag.py","logger":"airflow.models.dagbag.DagBag"}
+{"timestamp":"2025-05-24T12:47:23.783899","level":"info","event":"Secrets backends loaded for worker","count":1,"backend_classes":["EnvironmentVariablesBackend"],"logger":"supervisor"}
+{"timestamp":"2025-05-24T12:47:23.806981","level":"info","event":"Connection Retrieved 'aws_default'","logger":"airflow.hooks.base"}
+{"timestamp":"2025-05-24T12:47:23.807264","level":"info","event":"AWS Connection (conn_id='aws_default', conn_type='aws') credentials retrieved from extra.","logger":"airflow.providers.amazon.aws.utils.connection_wrapper.AwsConnectionWrapper"}
+{"timestamp":"2025-05-24T12:47:24.438407","level":"info","event":"Bucket with name: business.analytics already exists","logger":"airflow.task.operators.airflow.providers.amazon.aws.operators.s3.S3CreateBucketOperator"}

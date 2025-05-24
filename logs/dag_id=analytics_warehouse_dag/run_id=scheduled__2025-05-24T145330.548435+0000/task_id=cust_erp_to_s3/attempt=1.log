@@ -1,0 +1,5 @@
+{"timestamp":"2025-05-24T14:53:42.421724","level":"info","event":"DAG bundles loaded: dags-folder","logger":"airflow.dag_processing.bundles.manager.DagBundlesManager"}
+{"timestamp":"2025-05-24T14:53:42.422283","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/analytics_dag.py","logger":"airflow.models.dagbag.DagBag"}
+{"timestamp":"2025-05-24T14:53:42.630770","level":"info","event":"Secrets backends loaded for worker","count":1,"backend_classes":["EnvironmentVariablesBackend"],"logger":"supervisor"}
+{"timestamp":"2025-05-24T14:53:42.656118","level":"info","event":"Connection Retrieved 'aws_default'","logger":"airflow.hooks.base"}
+{"timestamp":"2025-05-24T14:53:42.656448","level":"info","event":"AWS Connection (conn_id='aws_default', conn_type='aws') credentials retrieved from extra.","logger":"airflow.providers.amazon.aws.utils.connection_wrapper.AwsConnectionWrapper"}
