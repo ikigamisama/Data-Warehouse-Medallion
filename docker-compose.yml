@@ -360,6 +360,19 @@ services:
       timeout: 20s
       retries: 3
 
+  jupyter:
+    image: jupyter/scipy-notebook:latest
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./notebooks:/home/jovyan/work
+    depends_on:
+      - postgres
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - JUPYTER_TOKEN=DataWarehouseJupyterRun # ← Leave empty to disable token
+      - JUPYTER_PASSWORD=JupyterPassRun
+
   minio_mc_setup:
     image: minio/mc:latest
     depends_on:

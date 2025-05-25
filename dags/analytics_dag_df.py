@@ -1,27 +1,26 @@
 from airflow import DAG
-from airflow.providers.standard.operators.bash import BashOperator
 from airflow.providers.standard.operators.python import PythonOperator
 from airflow.providers.standard.operators.empty import EmptyOperator
 from airflow.providers.amazon.aws.operators.s3 import S3CreateBucketOperator
 from airflow.providers.amazon.aws.transfers.local_to_s3 import (
     LocalFilesystemToS3Operator,
 )
-from airflow.providers.amazon.aws.transfers.sql_to_s3 import SqlToS3Operator
 from airflow.utils.task_group import TaskGroup
 
 from datetime import datetime, timedelta
 
-from functions.silver_medallion import data_preprocessing_dim
-from functions.gold_medallion import data_aggreviation
+from functions.df.silver_medallion import data_preprocessing_dim
+from functions.df.gold_medallion import data_aggreviation
 
 with DAG(
     "analytics_warehouse_df_dag",
     description="A DAG to Pull the sales and business data df into warehouse for analyzation",
     schedule=timedelta(days=1),
     start_date=datetime(2025, 5, 1),
+    tags=['data_warehouse', 'dataframe'],
     catchup=False,
 ) as dag:
-    analytics_bucket = "business.analytics"
+    analytics_bucket = "business-analytics-df"
 
     create_s3_bucket = S3CreateBucketOperator(
         task_id="create_s3_bucket", bucket_name=analytics_bucket, aws_conn_id="aws_default"

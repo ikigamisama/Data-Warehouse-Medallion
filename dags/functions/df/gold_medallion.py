@@ -1,12 +1,10 @@
-import os
-import boto3
 import io
 
 import pandas as pd
 import numpy as np
 
 from dotenv import load_dotenv
-from datetime import datetime
+from functions.utils import save_df_to_s3, get_s3_client
 
 load_dotenv()
 
@@ -69,42 +67,21 @@ def fact_sales(sales_details, gold_dim_products, gold_dim_customers):
     return dim_df[['order_number', 'product_key', 'customer_key', 'order_date', 'shipping_date', 'due_date', 'sales_amount', 'quantity', 'price']]
 
 
-s3_client = boto3.client(
-    service_name="s3",
-    endpoint_url="http://minio:9000",
-    aws_access_key_id=os.getenv("MINIO_ACCESS_KEY"),
-    aws_secret_access_key=os.getenv("MINIO_SECRET_KEY"),
-    region_name="us-east-1",
-)
+def data_aggreviation():
+    s3 = get_s3_client()
+    cust_info_response = s3.get_object(
+        Bucket="business-analytics-df", Key="warehouse/silver/source_crm/cust_info.csv")
+    prd_info_response = s3.get_object(
+        Bucket="business-analytics-df", Key="warehouse/silver/source_crm/prd_info.csv")
+    sales_details_info_response = s3.get_object(
+        Bucket="business-analytics-df", Key="warehouse/silver/source_crm/sales_details.csv")
 
-
-def save_df_to_s3(df, bucket, key):
-    buffer = io.StringIO()
-    df.to_csv(buffer, index=False)
-    buffer.seek(0)
-    s3_client.put_object(
-        Bucket=bucket,
-        Key=key,
-        Body=buffer.getvalue(),
-        ContentType="text/csv"
-    )
-
-
-def data_aggreviation(**kwargs):
-
-    cust_info_response = s3_client.get_object(
-        Bucket="business.analytics", Key="warehouse/silver/source_crm/cust_info.csv")
-    prd_info_response = s3_client.get_object(
-        Bucket="business.analytics", Key="warehouse/silver/source_crm/prd_info.csv")
-    sales_details_info_response = s3_client.get_object(
-        Bucket="business.analytics", Key="warehouse/silver/source_crm/sales_details.csv")
-
-    cust_erp_response = s3_client.get_object(
-        Bucket="business.analytics", Key="warehouse/silver/source_erp/CUST_AZ12.csv")
-    loc_erp_response = s3_client.get_object(
-        Bucket="business.analytics", Key="warehouse/silver/source_erp/LOC_A101.csv")
-    cat_erp_response = s3_client.get_object(
-        Bucket="business.analytics", Key="warehouse/silver/source_erp/PX_CAT_G1V2.csv")
+    cust_erp_response = s3.get_object(
+        Bucket="business-analytics-df", Key="warehouse/silver/source_erp/CUST_AZ12.csv")
+    loc_erp_response = s3.get_object(
+        Bucket="business-analytics-df", Key="warehouse/silver/source_erp/LOC_A101.csv")
+    cat_erp_response = s3.get_object(
+        Bucket="business-analytics-df", Key="warehouse/silver/source_erp/PX_CAT_G1V2.csv")
 
     cust_info = pd.read_csv(io.StringIO(
         cust_info_response["Body"].read().decode('utf-8')))
@@ -125,9 +102,9 @@ def data_aggreviation(**kwargs):
     gold_fact_sales = fact_sales(
         sales_details_info, gold_dim_products, gold_dim_customers)
 
-    save_df_to_s3(gold_dim_customers, "business.analytics",
+    save_df_to_s3(s3, gold_dim_customers, "business-analytics-df",
                   "warehouse/gold/gold_dim_customers.csv")
-    save_df_to_s3(gold_dim_products, "business.analytics",
+    save_df_to_s3(s3, gold_dim_products, "business-analytics-df",
                   "warehouse/gold/gold_dim_products.csv")
-    save_df_to_s3(gold_fact_sales, "business.analytics",
+    save_df_to_s3(s3, gold_fact_sales, "business-analytics-df",
                   "warehouse/gold/gold_dim_sales_details.csv")

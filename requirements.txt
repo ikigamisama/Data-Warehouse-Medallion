@@ -5,3 +5,4 @@ apache-airflow-providers-amazon
 s3fs
 boto3
 python-dotenv
+SQLAlchemy
