@@ -42,3 +42,31 @@ CREATE TABLE IF NOT EXISTS business.sales_details (
 
 COPY business.sales_details(sls_ord_num, sls_prd_key ,sls_cust_id, sls_order_dt, sls_ship_dt, sls_due_dt, sls_sales, sls_quantity, sls_price) 
 FROM '/input_data/source_crm/sales_details.csv' DELIMITER ','  CSV HEADER;
+
+
+CREATE TABLE IF NOT EXISTS business.cust_erp (
+    CID TEXT,
+    BDATE DATE,
+    GEN TEXT
+);
+
+COPY business.cust_erp(CID, BDATE, GEN) 
+FROM '/input_data/source_erp/CUST_AZ12.csv' DELIMITER ','  CSV HEADER;
+
+CREATE TABLE IF NOT EXISTS business.loc_erp (
+    CID TEXT,
+    CNTRY TEXT
+);
+
+COPY business.loc_erp(CID, CNTRY) 
+FROM '/input_data/source_erp/LOC_A101.csv' DELIMITER ','  CSV HEADER;
+
+CREATE TABLE IF NOT EXISTS business.px_cat_erp (
+    ID TEXT,
+    CAT TEXT,
+    SUBCAT TEXT,
+    MAINTENANCE TEXT
+);
+
+COPY business.px_cat_erp(ID, CAT ,SUBCAT ,MAINTENANCE) 
+FROM '/input_data/source_erp/PX_CAT_G1V2.csv' DELIMITER ','  CSV HEADER;
