@@ -34,11 +34,14 @@ This project sets up a full-fledged local **data pipeline environment** using Do
 2. Create an `.env` file in the root directory:
 
    ```env
-   AIRFLOW_UID=50000
-   _AIRFLOW_WWW_USER_USERNAME=airflow
-   _AIRFLOW_WWW_USER_PASSWORD=airflow
-   MINIO_ACCESS_KEY=minioLocalAccessKey
-   MINIO_SECRET_KEY=minioLocalSecretKey123
+    AIRFLOW_UID=50000
+    POSTGRES_HOST=postgres
+    POSTGRES_USER=airflow
+    POSTGRES_PASSWORD=airflow
+    POSTGRES_DB=airflow
+    POSTGRES_PORT=5432
+    MINIO_ACCESS_KEY=minioLocalAccessKey
+    MINIO_SECRET_KEY=minioLocalSecretKey123
    ```
 
 3. Spin up the services:
