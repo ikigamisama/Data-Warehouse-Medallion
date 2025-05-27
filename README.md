@@ -1,4 +1,4 @@
-# 🏗️ Modern Data Pipeline with Airflow, PostgreSQL, MinIO, and Jupyter
+# 🏗️ Modern Data Pipeline with Airflow, PostgreSQL, MinIO, and Jupyter With Data Analysis and Report
 
 This project sets up a full-fledged local **data pipeline environment** using Docker Compose, featuring:
 
@@ -132,6 +132,59 @@ docker compose down -v --remove-orphans
 ```
 
 ---
+
+## 📊 Data Analysis & Reporting
+
+This project also enables robust data analysis and reporting using Jupyter Notebooks integrated with your data pipeline. The goal is to empower deeper insight extraction from processed data.
+
+## 🔍 Key Analytical Modules
+
+1. **Database & Dimensions Exploration**  
+   Understand the structure, relationships, and categories within your data.
+
+2. **Date & Measures Exploration**  
+   Analyze time-based behavior and numeric distributions of sales, quantity, profit, and more.
+
+3. **Business-Focused Analyses**:
+   - **Magnitude Analysis**: Evaluate total volumes (e.g., total sales by region).
+   - **Ranking Analysis**: Identify top/bottom customers, products, or stores.
+   - **Change Over Time**: Monitor trends and detect spikes or drops.
+   - **Cumulative Analysis**: Track value growth over time.
+   - **Performance Analysis**: Compare actuals vs. benchmarks.
+   - **Part-to-Whole Analysis**: Understand category or region contributions to totals.
+   - **Segmentation**: Group customers or products by behavior or performance.
+
+---
+
+## 📝 Pre-Built Reporting Notebooks
+
+### 📋 Customer Report
+
+**Purpose**: Understand customer-level engagement and behavior.  
+**Includes**:
+
+- Fields: Name, Age, Transaction details
+- Segments: VIP, Regular, New
+- Metrics: Total Orders, Sales, Quantity, Lifespan
+- KPIs:
+  - Recency (months since last order)
+  - Avg. Order Value
+  - Avg. Monthly Spend
+
+### 📦 Product Report
+
+**Purpose**: Monitor product performance and value generation.  
+**Includes**:
+
+- Fields: Product name, Category, Cost
+- Segments: High, Mid, Low performers
+- Metrics: Total Sales, Orders, Quantity Sold, Unique Customers, Lifespan
+- KPIs:
+  - Recency (since last sale)
+  - Avg. Order Revenue
+  - Avg. Monthly Revenue
+
+> 📁 These notebooks are located under the `/notebooks/` folder and connect directly to your local database and object storage for seamless analysis.
 
 ## 🔐 Security Warning
 

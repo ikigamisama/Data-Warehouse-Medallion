@@ -1,3 +1,4 @@
 .env
 logs/*
 notebooks/business_analytics.db
+notebooks/business_analytics.db.wal
